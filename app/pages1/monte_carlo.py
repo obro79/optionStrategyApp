@@ -3,6 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 
+
+#TODO add dynamic way to handle lots of simulations/ give warning.
 def monte_carlo_page():
     st.set_page_config(layout="wide",initial_sidebar_state="expanded") 
         
