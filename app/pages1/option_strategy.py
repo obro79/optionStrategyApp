@@ -1,20 +1,19 @@
 import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 
 
 ## cd /Users/owenfisher/Desktop/Machine\ Learning/app/
 ## streamlit run optionstrategybuilder.py
 def option_strategy_page():
     
-    def apply_page_config():
-        st.set_page_config(
-            layout="centered",
-            initial_sidebar_state="expanded",
-            page_title="Option Strategy App"
-        ) 
-        ##
-    apply_page_config() 
+    st.set_page_config(
+        layout="centered",
+        initial_sidebar_state="expanded",
+        page_title="Option Strategy App"
+    ) 
+        ## 
     
     def display_strategy_builder():
         st.title("Option Strategy Builder")
@@ -79,12 +78,42 @@ def option_strategy_page():
             ]
         else:  # Custom strategy (no presets)
             return []
+        
+    # def get_greeks_for_strat(current_price, time_to_maturity, volatility, interest_rate, options):
+    #     greeks_summary = {
+    #         "Option Type": [],
+    #         "Strike Price": [],
+    #         "Delta": [],
+    #         "Gamma": [],
+    #         "Vega": [],
+    #         "Theta": [],
+    #         "Rho": []
+    #     }
+        
+    #     for option in options:
+    #         # Initialize the Black-Scholes model for each option
+    #         bs_model = BlackScholes(time_to_maturity, option['strike'], current_price, volatility, interest_rate)
+    #         greeks = bs_model.calculate_greeks(current_price)
+            
+    #         option_greeks = greeks[option['type']]  # Either 'Call' or 'Put'
+
+    #         # Populate the table row by row
+    #         greeks_summary["Option Type"].append(option['type'])
+    #         greeks_summary["Strike Price"].append(option['strike'])
+    #         greeks_summary["Delta"].append(option_greeks['Delta'])
+    #         greeks_summary["Gamma"].append(option_greeks['Gamma'])
+    #         greeks_summary["Vega"].append(option_greeks['Vega'])
+    #         greeks_summary["Theta"].append(option_greeks['Theta'])
+    #         greeks_summary["Rho"].append(option_greeks['Rho'])
+
+    #     return pd.DataFrame(greeks_summary)    
 
 # UI Inputs
     st.sidebar.title("Option Strategy Builder")
 
 # Option to select a preset strategy or custom
     strategy_type = st.sidebar.selectbox("Select Strategy Type", ["Straddle", "Strangle", "Butterfly", "Bull Spread", "Iron Condor", "Custom"])
+    ## future feature num_strategy = st.sidebar.number_input(f"How Many",  min_value=1, max_value=100, value=5)
 
     current_price = st.sidebar.number_input("Current Asset Price", value=100.0)
 
@@ -114,6 +143,21 @@ def option_strategy_page():
     # Spot price range for the payoff diagram
     min_spot_price = st.sidebar.number_input("Min Spot Price", value=50.0)
     max_spot_price = st.sidebar.number_input("Max Spot Price", value=150.0)
+    calculate_greeks = st.sidebar.checkbox("Calculate Greeks?") ## can change to display "x name'
+    
+    # if calculate_greeks: #checkbox
+    #     time_to_maturity = st.sidebar.number_input("Time to Maturity (Years)", value=1.0)
+    #     volatility = st.sidebar.number_input("Volatility", value=0.20)
+    #     risk_free_interest_rate = st.sidebar.number_input("Risk-Free Interest Rate", value=0.05)
+        
+    #     greeks_df = get_greeks_for_strat(current_price, time_to_maturity, volatility, risk_free_interest_rate, options)
+        
+    #     st.subheader(f"Greeks for the {strategy_type} Strategy")
+    #     st.table(greeks_df)
+        
+    
+        
+    
     spot_prices = np.linspace(min_spot_price, max_spot_price, 100)
 
     # Calculate total strategy payoff
@@ -157,7 +201,24 @@ def option_strategy_page():
     max_profit = np.max(strategy_payoff)
     max_loss = np.min(strategy_payoff)
     break_even = spot_prices[np.where(np.isclose(strategy_payoff, 0))]
+    max_profit = np.max(strategy_payoff)
+    min_loss = np.min(strategy_payoff)
 
-    st.write(f"Maximum Profit: ${max_profit:.2f}")
-    st.write(f"Maximum Loss: ${max_loss:.2f}")
-    st.write(f"Break-Even Points: {', '.join([f'${be:.2f}' for be in break_even])}")
+    # Find the points (spot prices) where max and min profit occur
+    max_profit_point = spot_prices[np.argmax(strategy_payoff)]
+    min_loss_point = spot_prices[np.argmin(strategy_payoff)]
+
+    # Find break-even points (spot prices where profit is close to zero)
+    break_even_points = spot_prices[np.isclose(strategy_payoff, 0, atol=1e-2)]
+
+    # Create a DataFrame for the profit/loss table
+    profit_loss_data = {
+        "Metric": ["Maximum Profit", "Maximum Loss", "Break-Even Points"],
+        "Value": [f"${max_profit:.2f} at ${max_profit_point:.2f}", 
+                f"${min_loss:.2f} at ${min_loss_point:.2f}",
+                ', '.join([f"${be:.2f}" for be in break_even_points])]
+    }
+    
+    # Display the table
+    profit_loss_df = pd.DataFrame(profit_loss_data)
+    st.table(profit_loss_df)

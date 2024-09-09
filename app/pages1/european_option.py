@@ -17,9 +17,7 @@ def european_option_page():
         ) 
         
     apply_page_config() 
-    
-    
-    
+       
     st.markdown("""
             <style>
         /* Center the main content */
@@ -94,7 +92,6 @@ def european_option_page():
             
         """, unsafe_allow_html=True)
       
-    
     class BlackScholes:
         def __init__(self, time_to_maturity, strike, current_price, volatility, interest_rate):
             self.time_to_maturity = time_to_maturity

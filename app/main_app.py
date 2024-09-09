@@ -3,8 +3,8 @@ import streamlit as st
 # Import the necessary pages
 from pages1.european_option import european_option_page
 from pages1.american_option import american_option_page
-from pages1.strategy_builder import strategy_builder_page
 from pages1.option_strategy import option_strategy_page
+from pages1.monte_carlo import monte_carlo_page
 
 ## source myenv/bin/activate
 ## cd /Users/owenfisher/Desktop/optionStrategyApp/app
@@ -15,7 +15,8 @@ from pages1.option_strategy import option_strategy_page
 pages = {
     "Options": [
         st.Page(european_option_page, title="European Option", icon="📈"),
-        st.Page(american_option_page, title="American Option", icon="📊")
+        st.Page(american_option_page, title="American Option", icon="📊"),
+        st.Page(monte_carlo_page, title="Monte Carlo Simulation", icon="📊") # change icon later
     ],
     "Strategies": [
         st.Page(option_strategy_page, title="Option Strategy Builder", icon="🛠️")
