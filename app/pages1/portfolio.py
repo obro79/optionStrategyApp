@@ -85,15 +85,18 @@ def portfolio_optimization(returns, target_return):
 # Portfolio Management Page
 def portfolio_management_page():
     st.title("Portfolio Management: Efficient Frontier")
+    
+    num_stocks = st.sidebar.number_input("Number of Stocks", min_value=2, max_value=10, value=2)
+
 
     # Predefined stocks to load initially
     default_stocks = ['AAPL', 'MSFT']
 
-    # Create an input box for each stock ticker, initialized with the default values
-    stock1 = st.sidebar.text_input("Stock 1", value=default_stocks[0])
-    stock2 = st.sidebar.text_input("Stock 2", value=default_stocks[1])
+    tickers_list = []
+    for i in range(num_stocks):
+        stock_ticker = st.sidebar.text_input(f"Stock {i+1}", value=f"Stock {i+1}" if i >= 2 else ['AAPL', 'MSFT'][i])  # Default tickers for first two stocks
+        tickers_list.append(stock_ticker)
 
-    tickers_list = [stock1, stock2]
 
     # Fetch the historical data for the stocks
     st.write(f"Fetching data for: {tickers_list}")
