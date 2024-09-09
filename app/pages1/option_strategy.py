@@ -13,7 +13,7 @@ def option_strategy_page():
             initial_sidebar_state="expanded",
             page_title="Option Strategy App"
         ) 
-        
+        ##
     apply_page_config() 
     
     def display_strategy_builder():
