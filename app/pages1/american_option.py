@@ -105,6 +105,7 @@ def american_option_page():
         ) 
         
     apply_page_config() 
+    ##
     
     st.markdown("""
             <style>

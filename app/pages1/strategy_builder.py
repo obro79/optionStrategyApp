@@ -59,3 +59,5 @@ def strategy_builder_page():
     ax.set_title(f"{strategy_type} Strategy Payoff")
     ax.legend()
     st.pyplot(fig)
+    
+    ##
