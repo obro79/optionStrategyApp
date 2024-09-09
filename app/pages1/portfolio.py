@@ -13,7 +13,7 @@ def calculate_efficient_frontier(returns, num_portfolios=5000, risk_free_rate=0.
     
     # Check if there are enough data points
     if returns.shape[0] < 2 or returns.shape[1] < 2:
-        st.error("Not enough data points to calculate covariance. Please provide more data.")
+        st.error("Either an invalid Ticker was entered or there was an error fetching the data")
         return None, None
     
     for i in range(num_portfolios):
@@ -84,6 +84,8 @@ def portfolio_optimization(returns, target_return):
 
 # Portfolio Management Page
 def portfolio_management_page():
+
+    
     st.title("Portfolio Management: Efficient Frontier")
     
     num_stocks = st.sidebar.number_input("Number of Stocks", min_value=2, max_value=10, value=2)
@@ -99,7 +101,7 @@ def portfolio_management_page():
 
 
     # Fetch the historical data for the stocks
-    st.write(f"Fetching data for: {tickers_list}")
+    st.write(f"Optimizing for: {tickers_list}")
     data = fetch_yahoo_data(tickers_list)
     
     if data is not None:
@@ -131,8 +133,11 @@ def portfolio_management_page():
         if optimal_portfolio.success:
             st.write(f"Optimal Portfolio Weights for Desired Return {target_return}:")
             weights_df = pd.DataFrame(optimal_portfolio.x, index=tickers_list, columns=["Weight"])
-            st.write(weights_df)
+            st.dataframe(weights_df, width=800, height=400)
+            #st.write(weights_df)
         else:
             st.error("Optimization failed to converge.")
     else:
         st.error("Failed to fetch data for the provided tickers.")
+        
+ 
