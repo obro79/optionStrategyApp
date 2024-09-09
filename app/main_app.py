@@ -11,7 +11,6 @@ from pages1.portfolio import portfolio_management_page
 ## cd /Users/owenfisher/Desktop/optionStrategyApp/app
 ##streamlit run main_app.py
 
-
 # Navigation for the app
 pages = {
     "Options": [
