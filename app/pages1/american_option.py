@@ -214,7 +214,6 @@ def american_option_page():
             </div>
         """, unsafe_allow_html=True)
         
-        american_call_option.visualize_binomial_tree()
     
     with col2:
         st.markdown(f"""
@@ -224,7 +223,7 @@ def american_option_page():
                     <div class="metric-value">${american_put_price:.2f}</div>
                 </div>
             </div>
-        """, unsafe_allow_html=True)
-        american_put_option.visualize_binomial_tree()     
+        """, unsafe_allow_html=True)  
+    american_call_option.visualize_binomial_tree()      
 
     

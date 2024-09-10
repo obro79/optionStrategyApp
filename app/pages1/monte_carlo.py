@@ -7,6 +7,7 @@ from scipy.stats import norm
 #TODO add dynamic way to handle lots of simulations/ give warning.
 def monte_carlo_page():
     st.set_page_config(layout="wide",initial_sidebar_state="expanded") 
+   
         
     st.title("Monte Carlo Simulation for Option Pricing")
 
@@ -102,10 +103,10 @@ def monte_carlo_page():
     # Calculate the Black-Scholes price for comparison TODO stylize the text here
     if compare_bs:
         bs_price = black_scholes_price(current_price, strike_price, time_to_maturity, volatility, risk_free_rate, option_type)
-        st.write(f"Black-Scholes {option_type} Option Price: ${bs_price:.2f}")
+        st.write(f"Black-Scholes {option_type} Option Price: ${bs_price:.2f}") 
     
     # Display the results
-    st.write(f"Monte Carlo {option_type} Option Price: ${monte_carlo_price:.2f}")
+    st.write(f"Monte Carlo {option_type} Option Price: ${monte_carlo_price:.2f}") 
     
     # Visualize the final prices
     st.subheader("Distribution of Final Simulated Prices")
