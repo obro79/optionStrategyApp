@@ -14,10 +14,10 @@ def monte_carlo_page():
     st.sidebar.title("Simulation Parameters")
     
     current_price = st.sidebar.number_input("Current Asset Price", value=100.0)
-    strike_price = st.sidebar.number_input("Strike Price", value=100.0)
-    time_to_maturity = st.sidebar.number_input("Time to Maturity (Years)", value=1.0)
-    volatility = st.sidebar.number_input("Volatility (σ)", value=0.2)
-    risk_free_rate = st.sidebar.number_input("Risk-Free Interest Rate", value=0.05)
+    strike_price = st.sidebar.number_input("Strike Price", value=100.0,min_value=0 )
+    time_to_maturity = st.sidebar.number_input("Time to Maturity (Years)", value=1.0, max_value=50)
+    volatility = st.sidebar.number_input("Volatility (σ)", value=0.2, min_value=0.0,max_value=1 )
+    risk_free_rate = st.sidebar.number_input("Risk-Free Interest Rate", value=0.05,min_value=-.10, max_value=1)
     num_simulations = st.sidebar.number_input("Number of Simulations", min_value=100, max_value=100000, value=1000, step=1000)
     num_steps = st.sidebar.number_input("Number of Steps", min_value=50, max_value=504, value=252, step=50)
 
@@ -39,7 +39,6 @@ def monte_carlo_page():
         return price
     
     # Function to run Monte Carlo simulation
-    
     def monte_carlo_simulation_paths(current_price, time_to_maturity, volatility, risk_free_rate, num_simulations, num_steps):
         dt = time_to_maturity / num_steps
         price_paths = np.zeros((num_steps, num_simulations))

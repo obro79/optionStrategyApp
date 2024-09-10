@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 from scipy.stats import norm
 from numpy import exp, sqrt, log
 
-
 # Define the Black-Scholes class
 def european_option_page():
     def apply_page_config():
@@ -17,10 +16,7 @@ def european_option_page():
         ) 
         
     apply_page_config() 
-    
-    
-    
-       
+           
     st.markdown("""
             <style>
         /* Center the main content */
@@ -244,25 +240,23 @@ def european_option_page():
         st.subheader("Call Price Heatmap")
         fig_call, ax_call = plt.subplots(figsize=(24, 18))  # Increase figsize for bigger heatmap
         sns.heatmap(call_prices, xticklabels=np.round(spot_prices, 2), yticklabels=np.round(volatilities, 2),
-                    annot=True, fmt=".2f", cmap="viridis", ax=ax_call, annot_kws={"size": 16}, cbar_kws={"label": "Call Price"})
+                    annot=True, fmt=".2f", cmap="viridis", ax=ax_call, annot_kws={"size": 24}, cbar_kws={"label": "Call Price"})
         ax_call.set_xlabel('Spot Price')
         ax_call.set_ylabel('Volatility')
         st.pyplot(fig_call)
         st.markdown("<h3 style='text-align: center;'>Call Greeks</h3>", unsafe_allow_html=True)
         st.markdown(call_greeks_df.to_html(index=False), unsafe_allow_html=True)
         
-
     with col4:
         st.subheader("Put Price Heatmap")
         fig_put, ax_put = plt.subplots(figsize=(24, 18))  # Increase figsize for bigger heatmap
         sns.heatmap(put_prices, xticklabels=np.round(spot_prices, 2), yticklabels=np.round(volatilities, 2), annot=True, fmt=".2f",
-                    cmap="viridis", ax=ax_put, annot_kws={"size": 16})
+                    cmap="viridis", ax=ax_put, annot_kws={"size": 24})
         ax_put.set_xlabel('Spot Price')
         ax_put.set_ylabel('Volatility')
         st.pyplot(fig_put)
         st.markdown("<h3 style='text-align: center;'>Put Greeks</h3>", unsafe_allow_html=True)
         st.markdown(put_greeks_df.to_html(index=False), unsafe_allow_html=True)
-
 
     st.markdown("""
         <style>
@@ -281,5 +275,3 @@ def european_option_page():
         }
         </style>
     """, unsafe_allow_html=True)
-    
-    
