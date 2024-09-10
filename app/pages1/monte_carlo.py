@@ -18,7 +18,7 @@ def monte_carlo_page():
     time_to_maturity = st.sidebar.number_input("Time to Maturity (Years)", value=1.0)
     volatility = st.sidebar.number_input("Volatility (σ)", value=0.2)
     risk_free_rate = st.sidebar.number_input("Risk-Free Interest Rate", value=0.05)
-    num_simulations = st.sidebar.number_input("Number of Simulations", min_value=100, max_value=100000, value=10000, step=1000)
+    num_simulations = st.sidebar.number_input("Number of Simulations", min_value=100, max_value=100000, value=1000, step=1000)
     num_steps = st.sidebar.number_input("Number of Steps", min_value=50, max_value=504, value=252, step=50)
 
     option_type = st.sidebar.selectbox("Option Type", ["Call", "Put"])
