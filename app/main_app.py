@@ -18,11 +18,11 @@ pages = {
         st.Page(american_option_page, title="American Option", icon="📊"),
         st.Page(monte_carlo_page, title="Monte Carlo Simulation", icon="📉"), # change icon later
     ],
-    "Portfolio Managing": [
-        st.Page(portfolio_management_page, title="Portfolio Optimizer", icon="〽️") #TODO icon
-    ],
     "Strategies": [
         st.Page(option_strategy_page, title="Option Strategy Builder", icon="🛠️")
+    ],
+    "Portfolio Managing": [
+        st.Page(portfolio_management_page, title="Portfolio Optimizer", icon="〽️") #TODO icon
     ]
 }
 
