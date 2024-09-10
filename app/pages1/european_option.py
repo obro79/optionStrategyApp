@@ -239,10 +239,10 @@ def european_option_page():
     with col3:
         st.subheader("Call Price Heatmap")
         fig_call, ax_call = plt.subplots(figsize=(24, 18))  # Increase figsize for bigger heatmap
-        sns.heatmap(call_prices, xticklabels=np.round(spot_prices, 12), yticklabels=np.round(volatilities, 12),
+        sns.heatmap(call_prices, xticklabels=np.round(spot_prices, 1), yticklabels=np.round(volatilities, 1),
                     annot=True, fmt=".2f", cmap="viridis", ax=ax_call, annot_kws={"size": 24}, cbar_kws={"label": "Call Price"})
-        ax_call.set_xlabel('Spot Price')
-        ax_call.set_ylabel('Volatility')
+        ax_call.set_xlabel('Spot Price', fontsize=16)
+        ax_call.set_ylabel('Volatility', fontsize=16)
         st.pyplot(fig_call)
         st.markdown("<h3 style='text-align: center;'>Call Greeks</h3>", unsafe_allow_html=True)
         st.markdown(call_greeks_df.to_html(index=False), unsafe_allow_html=True)
@@ -250,10 +250,10 @@ def european_option_page():
     with col4:
         st.subheader("Put Price Heatmap")
         fig_put, ax_put = plt.subplots(figsize=(24, 18))  # Increase figsize for bigger heatmap
-        sns.heatmap(put_prices, xticklabels=np.round(spot_prices, 12), yticklabels=np.round(volatilities, 12), annot=True, fmt=".2f",
+        sns.heatmap(put_prices, xticklabels=np.round(spot_prices, 1), yticklabels=np.round(volatilities, 1), annot=True, fmt=".2f",
                     cmap="viridis", ax=ax_put, annot_kws={"size": 24})
-        ax_put.set_xlabel('Spot Price')
-        ax_put.set_ylabel('Volatility')
+        ax_put.set_xlabel('Spot Price', fontsize=16)
+        ax_put.set_ylabel('Volatility', fontsize=16)
         st.pyplot(fig_put)
         st.markdown("<h3 style='text-align: center;'>Put Greeks</h3>", unsafe_allow_html=True)
         st.markdown(put_greeks_df.to_html(index=False), unsafe_allow_html=True)
