@@ -14,10 +14,10 @@ def monte_carlo_page():
     st.sidebar.title("Simulation Parameters")
     
     current_price = st.sidebar.number_input("Current Asset Price", value=100.0)
-    strike_price = st.sidebar.number_input("Strike Price", value=100.0,min_value=0 )
-    time_to_maturity = st.sidebar.number_input("Time to Maturity (Years)", value=1.0, max_value=50)
-    volatility = st.sidebar.number_input("Volatility (σ)", value=0.2, min_value=0.0,max_value=1 )
-    risk_free_rate = st.sidebar.number_input("Risk-Free Interest Rate", value=0.05,min_value=-.10, max_value=1)
+    strike_price = st.sidebar.number_input("Strike Price", value=100.0,min_value=0.0 )
+    time_to_maturity = st.sidebar.number_input("Time to Maturity (Years)", value=1.0, max_value=50.0)
+    volatility = st.sidebar.number_input("Volatility (σ)", value=0.2, min_value=0.0,max_value=1.0 )
+    risk_free_rate = st.sidebar.number_input("Risk-Free Interest Rate", value=0.05,min_value=-.10, max_value=1.0)
     num_simulations = st.sidebar.number_input("Number of Simulations", min_value=100, max_value=100000, value=1000, step=1000)
     num_steps = st.sidebar.number_input("Number of Steps", min_value=50, max_value=504, value=252, step=50)
 
