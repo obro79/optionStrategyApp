@@ -68,3 +68,4 @@ def test_visualize_binomial_tree(monkeypatch):
 
     assert len(calls) == 1
     assert isinstance(calls[0], plt.Figure)
+#
